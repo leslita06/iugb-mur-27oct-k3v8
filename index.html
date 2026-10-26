@@ -1,0 +1,66 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>IUGB · Mur de réponses</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#002868;--yel:#F8D800;--ink:#0b1633}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--navy);color:#fff;font-family:Montserrat,Arial,sans-serif;overflow:hidden}
+header{display:flex;align-items:center;gap:2vw;padding:2vh 3vw;height:13vh;border-bottom:.6vh solid var(--yel)}
+header img{height:9vh}
+header .t{font-weight:800;font-size:3.2vh;letter-spacing:.05em;text-transform:uppercase}
+header .s{font-weight:500;font-size:2.2vh;opacity:.85}
+header .cnt{margin-left:auto;text-align:right}
+header .cnt b{display:block;font-size:6vh;color:var(--yel);line-height:1}
+header .cnt span{font-size:1.9vh;opacity:.85}
+main{height:79vh;padding:3vh 4vw;display:flex;gap:3vw}
+.screen{display:none;width:100%;height:100%}
+.screen.on{display:flex}
+.left{flex:1;display:flex;flex-direction:column;justify-content:center}
+h1{font-weight:800;font-size:5.6vh;line-height:1.15;margin-bottom:4vh}
+.bar{display:flex;align-items:center;margin:1.6vh 0}
+.lab{width:34%;font-size:3.3vh;font-weight:700;padding-right:1.5vw}
+.track{flex:1;height:7vh;background:rgba(255,255,255,.12);border-radius:1vh;overflow:hidden}
+.fill{height:100%;background:var(--yel);width:0;transition:width .8s ease}
+.val{width:13%;text-align:right;font-size:4vh;font-weight:800;color:var(--yel)}
+.side{width:24vw;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;color:var(--navy);border-radius:2vh;padding:2.5vh}
+.side img{width:100%;max-width:19vw}
+.side .u{font-weight:800;font-size:3.3vh;margin-top:1.5vh}
+.side .h{font-size:2vh;font-weight:500;margin-top:.8vh;text-align:center}
+.home{flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.home img{height:44vh;background:#fff;padding:2vh;border-radius:2vh}
+.home .u{font-size:7vh;font-weight:800;color:var(--yel);margin-top:3vh}
+.home p{font-size:3.4vh;margin-top:1.5vh}
+#cloud{display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:1.5vh 2.5vw;height:60vh}
+#cloud span{font-weight:800;line-height:1.05;transition:font-size .6s}
+.empty{font-size:3vh;opacity:.7}
+footer{height:8vh;display:flex;align-items:center;justify-content:space-between;padding:0 3vw;font-size:1.7vh;opacity:.6}
+#dot{display:inline-block;width:1.2vh;height:1.2vh;border-radius:50%;background:#3ddc84;margin-right:.6vw}
+#dot.off{background:#ff5a5a}
+</style></head><body>
+<header><img src="logo.png" alt=""><div><div class="t">Conférence Entrepreneuriat</div><div class="s">Mardi 27 octobre 2026 · Répondez depuis votre téléphone</div></div>
+<div class="cnt"><b id="n">0</b><span>répondants</span></div></header>
+<main>
+<section class="screen home on" id="s0"><img src="qr.png" alt="QR code"><div class="u">tally.so/r/Z99EvB</div><p>Scannez ou tapez le lien · 3 questions · 1 minute · anonyme</p></section>
+<section class="screen" id="s1"><div class="left"><h1>Avez-vous déjà vendu quelque chose&nbsp;?</h1><div id="b1"></div></div><div class="side"><img src="qr.png"><div class="u">tally.so/r/Z99EvB</div><div class="h">Question 1</div></div></section>
+<section class="screen" id="s2"><div class="left"><h1>Qu'est-ce qui vous freine le plus pour vous lancer&nbsp;?</h1><div id="b2"></div></div><div class="side"><img src="qr.png"><div class="u">tally.so/r/Z99EvB</div><div class="h">Question 2</div></div></section>
+<section class="screen" id="s3"><div class="left"><h1>En un mot&nbsp;: un entrepreneur, c'est…</h1><div id="cloud"><div class="empty">Les mots apparaissent ici une fois validés.</div></div></div><div class="side"><img src="qr.png"><div class="u">tally.so/r/Z99EvB</div><div class="h">Question 3</div></div></section>
+</main>
+<footer><div><span id="dot"></span><span id="st">Connexion…</span></div><div>Touches 0 · 1 · 2 · 3 pour changer d'écran · F pour le plein écran</div></footer>
+<script>
+const SHEET="1GikvLfULwTEbhrvn2VRPN9POKAs85YVtkljfsWl1IDw";let last=Date.now();
+function show(i){document.querySelectorAll('.screen').forEach((s,k)=>s.classList.toggle('on',k==i));location.hash=i}
+document.addEventListener('keydown',e=>{if('0123'.includes(e.key))show(+e.key);if(e.key=='f'||e.key=='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}});
+if(location.hash)show(+location.hash.slice(1)||0);
+function bars(el,items){const tot=items.reduce((a,b)=>a+b[1],0)||1;const max=Math.max(1,...items.map(x=>x[1]));
+ if(el.children.length!=items.length){el.innerHTML=items.map(()=>'<div class="bar"><div class="lab"></div><div class="track"><div class="fill"></div></div><div class="val"></div></div>').join('')}
+ items.forEach((it,i)=>{const r=el.children[i];r.querySelector('.lab').textContent=it[0];r.querySelector('.fill').style.width=(it[1]/max*100)+'%';r.querySelector('.val').textContent=Math.round(it[1]/tot*100)+' %'})}
+window.onData=function(d){try{const rows=d.table.rows.map(r=>r.c.map(c=>c&&c.v));
+ const q1=[],q2=[],q3=[];let n=0;rows.forEach(r=>{if(r[0]=='total')n=r[2]||0;if(r[0]=='q1')q1.push([r[1],r[2]||0]);if(r[0]=='q2')q2.push([r[1],r[2]||0]);if(r[0]=='q3')q3.push([r[1],r[2]||0])});
+ document.getElementById('n').textContent=n;bars(document.getElementById('b1'),q1);bars(document.getElementById('b2'),q2);
+ const c=document.getElementById('cloud');if(q3.length){const mx=Math.max(...q3.map(x=>x[1]));const col=['#F8D800','#ffffff','#9fc3ff'];
+  c.innerHTML=q3.map((w,i)=>`<span style="font-size:${3+6*w[1]/mx}vh;color:${col[i%3]}">${w[0].replace(/[<>&]/g,'')}</span>`).join('')}
+ last=Date.now();document.getElementById('dot').className='';document.getElementById('st').textContent='En direct'}catch(e){}};
+function poll(){const s=document.createElement('script');s.src=`https://docs.google.com/spreadsheets/d/${SHEET}/gviz/tq?tqx=out:json;responseHandler:onData&sheet=Feuille%201&_=${Date.now()}`;s.onload=s.onerror=()=>s.remove();document.body.appendChild(s);
+ if(Date.now()-last>90000){document.getElementById('dot').className='off';document.getElementById('st').textContent='Pas de mise à jour depuis plus d\u2019une minute : vérifier le réseau'}}
+poll();setInterval(poll,5000);
+</script></body></html>
